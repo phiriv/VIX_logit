@@ -2,7 +2,7 @@
 #Author:        Philippe C. Rivet
 #Date:          20/03/30
 #Description:   Econometrics project to predict stock market drops using  
-#               the VIX and its variants through simple logistic regression.
+#               the VIX through simple logistic regression.
 #               Thanks to Andrew Ng and the Coursera ML course for inspiration
 #               --> coursera.org/learn/machine-learning
 
@@ -23,7 +23,7 @@ vix6m=vix6mTS(:,2);
 vix1yTS=dlmread('VIX1Y_Data.txt');
 vix1y=vix1yTS(:,2);
 sptsxTS=dlmread('SPTSX_Data.txt');
-sptsx=sptsxTS(199:end,4:5);
+sptsx=sptsxTS(196:end,4:5);
 #Drops in the S&P/TSX >= 2.5% are what we're interested in predicting with LR,
 #so they are labelled 1 and everything else 0
 y=sptsx(:,2);
@@ -35,6 +35,7 @@ fprintf(['Plotting data with + indicating (y = 1) examples and o ' ...
          'indicating (y = 0) examples.\n']);
          
 plotData(X, y);
+axis([1 160 0 18000]);
 hold on;
 #What are we looking at exactly?
 xlabel('VIX');
@@ -59,7 +60,7 @@ fprintf('Gradient at initial theta (zeros): \n');
 fprintf(' %f \n', grad);
 
 #Compute and display cost and gradient with non-zero test theta
-test_theta = [-1; 1; 1];
+test_theta = [-1; 1; 1;];
 [cost, grad] = costFunction02(test_theta, X, y);
 
 fprintf('\nCost at test theta: %f\n', cost);
